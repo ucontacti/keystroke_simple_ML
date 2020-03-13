@@ -38,7 +38,9 @@ kfold = KFold(n_splits=10, random_state=22) # k=10, split the data into 10 equal
 result_rm=cross_val_score(clf, X, y, cv=10,scoring='accuracy')
 print('The cross validated score for SVM Classifier is:',round(result_rm.mean()*100,2))
 
- 
+import joblib
+joblib.dump(clf, 'svm_model.pkl', compress=9)
+
 # In[5]: KNN classifier
 from sklearn.neighbors import KNeighborsClassifier
 clf = KNeighborsClassifier(metric='manhattan').fit(X_train, y_train)
