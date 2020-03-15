@@ -9,10 +9,17 @@ for file_name in files:
 
     new_data = pd.DataFrame()
     for i in range(0, data.shape[1], 2):
-        new_data[str(i) + "H"] = (data.iloc[:, i+1] - data.iloc[:, i])
+        new_data[str(int(i/2)) + "H"] = (data.iloc[:, i+1] - data.iloc[:, i])
         if(i+2 < data.shape[1]):
-            new_data[str(i) + 'DD'] = (data.iloc[:, i+2] - data.iloc[:, i])
-            new_data[str(i) + 'UD'] = (data.iloc[:, i+2] - data.iloc[:, i+1])
+            new_data[str(int(i/2)) + 'DD'] = (data.iloc[:, i+2] - data.iloc[:, i])
+            new_data[str(int(i/2)) + 'UD'] = (data.iloc[:, i+2] - data.iloc[:, i+1])
+        if(i+4 < data.shape[1]):
+            new_data[str(int(i/2)) + 'D2D'] = (data.iloc[:, i+4] - data.iloc[:, i])
+            new_data[str(int(i/2)) + 'U2D'] = (data.iloc[:, i+4] - data.iloc[:, i+1])
+        if(i+6 < data.shape[1]):
+            new_data[str(int(i/2)) + 'D3D'] = (data.iloc[:, i+6] - data.iloc[:, i])
+            new_data[str(int(i/2)) + 'U3D'] = (data.iloc[:, i+6] - data.iloc[:, i+1])
+        
     df_list.append(new_data)
     del new_data
 result_1 = pd.concat(df_list)
@@ -43,10 +50,17 @@ for file_name in files:
 
     new_data = pd.DataFrame()
     for i in range(0, data.shape[1], 2):
-        new_data[str(i) + "H"] = (data.iloc[:, i+1] - data.iloc[:, i])
+        new_data[str(int(i/2)) + "H"] = (data.iloc[:, i+1] - data.iloc[:, i])
         if(i+2 < data.shape[1]):
-            new_data[str(i) + 'DD'] = (data.iloc[:, i+2] - data.iloc[:, i])
-            new_data[str(i) + 'UD'] = (data.iloc[:, i+2] - data.iloc[:, i+1])
+            new_data[str(int(i/2)) + 'DD'] = (data.iloc[:, i+2] - data.iloc[:, i])
+            new_data[str(int(i/2)) + 'UD'] = (data.iloc[:, i+2] - data.iloc[:, i+1])
+        if(i+4 < data.shape[1]):
+            new_data[str(int(i/2)) + 'D2D'] = (data.iloc[:, i+4] - data.iloc[:, i])
+            new_data[str(int(i/2)) + 'U2D'] = (data.iloc[:, i+4] - data.iloc[:, i+1])
+        if(i+6 < data.shape[1]):
+            new_data[str(int(i/2)) + 'D3D'] = (data.iloc[:, i+6] - data.iloc[:, i])
+            new_data[str(int(i/2)) + 'U3D'] = (data.iloc[:, i+6] - data.iloc[:, i+1])
+
     new_data["Label"] = counter
     counter += 1
     df_list.append(new_data)
@@ -55,3 +69,6 @@ result_2 = pd.concat(df_list)
 
 result = pd.concat([result_1 , result_2])
 result.to_csv("final_dataset.csv")
+
+import matplotlib.pyplot as plt
+
